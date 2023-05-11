@@ -12,7 +12,8 @@
  */
 
 // Your code goes here...
-
+const allItems = document.querySelectorAll('.item')
+console.log(allItems);
 
 
 /**
@@ -23,7 +24,8 @@
  */
 
 // Your code goes here...
-
+const sortBtn = document.querySelectorAll('.sortBtn')
+console.log(sortBtn);
 
 
 /**
@@ -38,8 +40,24 @@
  */
 
 // Your code goes here...
+const sortData = (direction) => {
+    const container = document.getElementById('main');
+    const sortedItems = Array.from(allItems).sort((a, b) => {
+        if (direction == 'asc') {
+            return a.id.localeCompare(b.id);
+        } else {
+            return b.id.localeCompare(a.id);
+        }
+    });
 
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
 
+    for (let item of sortedItems) {
+        container.appendChild(item);
+    }
+}
 
 /**
  * @task
@@ -50,5 +68,10 @@
  */
 
 // Your code goes here...
-
+for (let btn of sortBtn) {
+    btn.addEventListener('click', (e) => {
+        const direc = btn.dataset.sortdir;
+        sortData(direc);
+    });
+}
 
